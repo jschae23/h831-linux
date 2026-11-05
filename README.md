@@ -3,7 +3,7 @@
 Status: **working** - DVB-T2 receive verified on a 690 MHz multiplex.
 
 This repository contains an out-of-tree Linux driver set for the
-AVerMedia H831 USB Hybrid DVB-T/T2 stick. It adds the missing board
+AVerMedia H831 USB Hybrid DVB-T/T2 stick (https://www.linuxtv.net/wiki/index.php/AVerMedia_H831_AVerTV_Hybrid_Volar_T2). It adds the missing board
 support to `cx231xx` and provides a driver for the MxL601 silicon tuner,
 which has no in-kernel driver.
 

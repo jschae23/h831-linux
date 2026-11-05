@@ -1,0 +1,16 @@
+# build artifacts
+*.o
+*.ko
+*.mod
+*.mod.c
+.*.cmd
+Module.symvers
+modules.order
+.tmp_versions/
+*.symvers
+*.order
+
+# local capture / logs
+*.pcap
+*.ts
+scan.log

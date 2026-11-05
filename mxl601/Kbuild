@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0
+# MaxLinear MxL601 tuner driver (new module, H831 bring-up)
+
+obj-m  += mxl601.o
+
+ccflags-y += -I$(src)

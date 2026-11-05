@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0
+# Panasonic MN88473 DVB-T/T2/C demodulator (stock in-kernel driver).
+# Chip identified empirically on AVerMedia H831 (bank2 reg 0xff == 0x03).
+
+obj-m  += mn88473.o
+
+ccflags-y += -I$(src)
+ccflags-y += -I$(H831_ROOT)/dtv-inc

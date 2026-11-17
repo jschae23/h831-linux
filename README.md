@@ -43,7 +43,8 @@ which has no in-kernel driver.
      power up/down
    * full tune/register-init sequence derived from the publicly
      available MxLWare601 reference, with PLL lock diagnostics
-   * defaults: **16 MHz crystal**, **4.063 MHz IF**, `ref_lut=1`
+   * defaults: **16 MHz crystal**, **4.063 MHz IF**, `ref_lut=1`,
+     single 3.3 V supply
 4. The build uses only the distribution `linux-headers` tree; no kernel
    source tree is required.
 
@@ -53,8 +54,13 @@ which has no in-kernel driver.
   `0x60`) all probe successfully
 * the tuner crystal is **16 MHz** (24 MHz never locks: `0x2B=0x04`)
 * IF output is **4.063 MHz**, matching the vendor driver default
-* the driver locks the 690 MHz DVB-T2 mux, scans 11 services and records
-  a valid transport stream with `dvbv5-zap`
+* the board uses the **single 3.3 V supply** configuration
+  (`h831_single_supply=1`); the old default of `0` made weak muxes
+  undecodable even though 690 MHz still locked
+* a full 514-690 MHz DVB-T2 scan finds services on **546, 554, 578 and
+  690 MHz** when the signal is favourable; 690 MHz alone yields the
+  vendor-verified 11 services and a valid transport stream with
+  `dvbv5-zap`
 * the `mxl601` parameters can be changed at runtime through
   `/sys/module/cx231xx_h831/parameters/` for debugging; the compiled
   defaults are the verified values
@@ -167,8 +173,9 @@ polls `FE_READ_STATUS` for a lock.
 
 ## Known limitations
 
-* The verified defaults target a 690 MHz DVB-T2 mux. Other muxes have
-  not been swept; a broad scan is the next validation step.
+* The 690 MHz mux is the most reliable lock. Reception of the 546, 554
+  and 578 MHz muxes varies strongly with RF conditions; repeat the scan
+  before concluding a mux is absent.
 * Received C/N on the test mux was around 9-12 dB with the available
   antenna. HD playback may be marginal depending on signal quality.
 * The driver is an out-of-tree bring-up. Upstreaming would require

@@ -18,6 +18,7 @@ end to end.
 | `690MHz_channels.csv` | Parsed table of the 11 services (SIDs, PIDs, language, flags) | Yes - human/reference |
 | `690MHz_dvbv5_channels.conf` | `dvb-tools` / `dvbv5-zap` channel file, one section per service | **Yes** - `dvbv5-zap -c` |
 | `690MHz_dvbv5_scan.conf` | `dvbv5-scan` initial file for the single mux | **Yes** - `dvbv5-scan` |
+| `uhf-514-690_dvbv5_scan.conf` | `dvbv5-scan` initial file for UHF 26-48 | **Yes** - `dvbv5-scan` |
 | `README_test_vectors.md` | This file | - |
 
 The original vendor list is not included; these files contain only the
@@ -136,3 +137,18 @@ Use it as the acceptance test described in the top-level `README.md`:
 
 Record the observed `dvb-fe-tool -m` output alongside any test result;
 SNR/BER numbers make regressions obvious.
+
+---
+
+## Full-band scan
+
+`uhf-514-690_dvbv5_scan.conf` sweeps UHF 26-48 (514-690 MHz) in 8 MHz
+steps:
+
+```bash
+dvbv5-scan -a 0 -p test-vectors/uhf-514-690_dvbv5_scan.conf
+```
+
+With `h831_single_supply=1` this found services on 546, 554, 578 and
+690 MHz. Reception of the non-690 muxes is strongly RF-dependent; a mux
+that is absent in one scan may decode in the next.

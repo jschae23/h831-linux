@@ -78,9 +78,9 @@ static int h831_xtal_cap = 12;  /* XTAL capacitance bits4:0 */
 module_param(h831_xtal_cap, int, 0644);
 MODULE_PARM_DESC(h831_xtal_cap, "MxL601 crystal capacitance 0-31 (SDK default 12)");
 
-static int h831_single_supply;
+static int h831_single_supply = 1;
 module_param(h831_single_supply, int, 0644);
-MODULE_PARM_DESC(h831_single_supply, "MxL601 single 3.3V supply board config (0/1)");
+MODULE_PARM_DESC(h831_single_supply, "MxL601 single 3.3V supply board config (0/1, default 1 for H831)");
 
 static int h831_xtal_sharing;
 module_param(h831_xtal_sharing, int, 0644);
